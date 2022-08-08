@@ -4,7 +4,6 @@ import com.etiya.northwind.business.abstracts.ProductService;
 import com.etiya.northwind.business.responses.products.ProductListResponse;
 import com.etiya.northwind.dataAccess.abstracts.ProductRepository;
 import com.etiya.northwind.entities.concretes.Product;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

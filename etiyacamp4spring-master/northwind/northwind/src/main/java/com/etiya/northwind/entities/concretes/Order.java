@@ -26,11 +26,5 @@ public class Order {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-   /* @OneToOne(mappedBy = "order", orphanRemoval=true,cascade=CascadeType.PERSIST)
-    private OrderDetail orderDetail;*/
-/*    @OneToOne(mappedBy = "order", orphanRemoval=true,cascade=CascadeType.PERSIST)
-    private OrderDetailsId orderDetailsId;*/
-
-
 
 }

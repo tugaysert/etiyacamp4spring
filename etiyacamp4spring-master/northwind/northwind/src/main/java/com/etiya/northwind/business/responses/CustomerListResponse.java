@@ -14,7 +14,7 @@ public class CustomerListResponse {
     private String customerId;
     private String companyName;
     private String contactName;
-    private List<Integer> orderIdList;
+
 
 
 }

@@ -30,4 +30,9 @@ public class ModelMapperManager implements ModelMapperService{
                 .setMatchingStrategy(MatchingStrategies.STANDARD);
         return this.modelMapper;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

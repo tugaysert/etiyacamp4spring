@@ -29,10 +29,13 @@ public class CustomerManager implements CustomerService {
     @Override
     public List<CustomerListResponse> getAlL() {
         List<Customer> result = this.customerRepository.findAll();
-        List<CustomerListResponse> response= result
+        List<CustomerListResponse> response = result
                 .stream()
-                .map(customer -> this.modelMapperService.forResponse().map(customer,CustomerListResponse.class))
+                .map(customer -> this.modelMapperService.forResponse().map(customer, CustomerListResponse.class))
                 .collect(Collectors.toList());
+
+
         return response;
     }
+
 }

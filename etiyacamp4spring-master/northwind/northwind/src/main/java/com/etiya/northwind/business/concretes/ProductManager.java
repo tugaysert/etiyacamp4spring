@@ -25,10 +25,10 @@ public class ProductManager implements ProductService {
 
     @Override
     public List<ProductListResponse> getAlL() {
-        List<Product> result =  this.productRepository.findAll();
+        List<Product> result = this.productRepository.findAll();
         List<ProductListResponse> response = result
                 .stream()
-                .map(product -> this.modelMapperService.forResponse().map(product,ProductListResponse.class))
+                .map(product -> this.modelMapperService.forResponse().map(product, ProductListResponse.class))
                 .collect(Collectors.toList());
 
         return response;

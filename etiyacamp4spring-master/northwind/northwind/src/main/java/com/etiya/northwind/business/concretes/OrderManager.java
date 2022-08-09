@@ -26,11 +26,22 @@ public class OrderManager implements OrderService {
 
     @Override
     public List<OrderListResponse> getAlL() {
-        List<Order> result =  this.orderRepository.findAll();
+        List<Order> result = this.orderRepository.findAll();
         List<OrderListResponse> response = result
                 .stream()
                 .map(order -> this.modelMapperService.forResponse().map(order, OrderListResponse.class))
                 .collect(Collectors.toList());
+
+        for (int i = 0; i < result.size(); i++) {
+            response.get(i)
+                    .setEmployeeName(result.get(i).getEmployee().getFirstName()
+                            + " " + result.get(i).getEmployee().getLastName());
+
+            response.get(i)
+                    .setCustomerName(result.get(i).getCustomer().getCompanyName()
+                            + " and " + result.get(i).getCustomer().getContactName());
+
+        }
         return response;
     }
 }

@@ -22,4 +22,5 @@ public class CustomerController {
     public List<CustomerListResponse> getAll() {
         return this.customerService.getAlL();
     }
+
 }

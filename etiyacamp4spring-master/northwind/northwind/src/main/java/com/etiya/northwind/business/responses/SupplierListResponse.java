@@ -14,5 +14,5 @@ public class SupplierListResponse {
     private Integer supplierId;
     private String companyName;
     private String contactName;
-    private List<String> productNameList;
+
 }

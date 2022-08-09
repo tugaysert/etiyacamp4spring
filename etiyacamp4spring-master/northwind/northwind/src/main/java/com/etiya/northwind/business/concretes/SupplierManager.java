@@ -5,6 +5,7 @@ import com.etiya.northwind.business.responses.ProductListResponse;
 import com.etiya.northwind.business.responses.SupplierListResponse;
 import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
 import com.etiya.northwind.dataAccess.abstracts.SupplierRepository;
+import com.etiya.northwind.entities.concretes.Product;
 import com.etiya.northwind.entities.concretes.Supplier;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,7 @@ public class SupplierManager implements SupplierService {
                 .stream()
                 .map(supplier -> this.modelMapperService.forResponse().map(supplier, SupplierListResponse.class))
                 .collect(Collectors.toList());
+
         return response;
     }
 }

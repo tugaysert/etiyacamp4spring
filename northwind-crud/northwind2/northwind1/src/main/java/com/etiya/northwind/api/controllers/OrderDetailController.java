@@ -28,8 +28,8 @@ public class OrderDetailController {
     }
 
     @GetMapping("/geyById/")
-    public OrderDetailListResponse getOrderDetailById(@RequestBody OrderDetailsId orderDetailsId) {
-        return orderDetailService.getOrderDetailById(orderDetailsId);
+    public OrderDetailListResponse getOrderDetailById(@RequestParam Integer orderId, @RequestParam Integer productId) {
+        return orderDetailService.getOrderDetailById(orderId,productId);
     }
 
     @PostMapping
@@ -39,8 +39,8 @@ public class OrderDetailController {
     }
 
     @DeleteMapping
-    public void deleteOrderDetailById(@RequestBody OrderDetailsId orderDetailsId){
-        orderDetailService.deleteOrderDetailById(orderDetailsId);
+    public void deleteOrderDetailById(@RequestParam Integer orderId, @RequestParam Integer productId){
+        orderDetailService.deleteOrderDetailById(orderId,productId);
     }
 
     @PutMapping

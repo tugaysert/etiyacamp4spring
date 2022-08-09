@@ -12,11 +12,11 @@ import java.util.Map;
 public interface OrderDetailService {
     List<OrderDetailListResponse> getAlL();
 
-    OrderDetailListResponse getOrderDetailById(OrderDetailsId orderDetailsId);
+    OrderDetailListResponse getOrderDetailById(Integer orderId, Integer productId);
 
     OrderDetailListResponse createOrderDetail(CreateOrderDetailRequest createOrderDetailRequest);
 
-    void deleteOrderDetailById(OrderDetailsId orderDetailsId);
+    void deleteOrderDetailById(Integer orderId, Integer productId);
 
     OrderDetailListResponse updateOrderDetail(OrderDetailsId orderDetailsId, UpdateOrderDetailRequest updateOrderDetailRequest);
 

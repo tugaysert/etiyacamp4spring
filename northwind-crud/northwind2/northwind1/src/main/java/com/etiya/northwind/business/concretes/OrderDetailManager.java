@@ -1,15 +1,15 @@
 package com.etiya.northwind.business.concretes;
 
 import com.etiya.northwind.business.abstracts.OrderDetailService;
+import com.etiya.northwind.business.abstracts.OrderService;
+import com.etiya.northwind.business.abstracts.ProductService;
 import com.etiya.northwind.business.responses.*;
 import com.etiya.northwind.business.responses.OrderDetailListResponse;
 import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
 import com.etiya.northwind.core.utilities.sort.SortingEntities;
 import com.etiya.northwind.dataAccess.abstracts.OrderDetailRepository;
+import com.etiya.northwind.entities.concretes.*;
 import com.etiya.northwind.entities.concretes.OrderDetail;
-import com.etiya.northwind.entities.concretes.OrderDetail;
-import com.etiya.northwind.entities.concretes.OrderDetail;
-import com.etiya.northwind.entities.concretes.OrderDetailsId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,10 +26,14 @@ public class OrderDetailManager implements OrderDetailService {
 
     private final OrderDetailRepository orderDetailRepository;
     private final ModelMapperService modelMapperService;
+    private final OrderService orderService;
+    private final ProductService productService;
 
-    public OrderDetailManager(OrderDetailRepository orderDetailRepository, ModelMapperService modelMapperService) {
+    public OrderDetailManager(OrderDetailRepository orderDetailRepository, ModelMapperService modelMapperService, OrderService orderService, ProductService productService) {
         this.orderDetailRepository = orderDetailRepository;
         this.modelMapperService = modelMapperService;
+        this.orderService = orderService;
+        this.productService = productService;
     }
 
     @Override
@@ -42,9 +46,8 @@ public class OrderDetailManager implements OrderDetailService {
         return response;
     }
     @Override
-    public OrderDetailListResponse getOrderDetailById(OrderDetailsId orderDetailsId) {
-
-        OrderDetail orderDetail = orderDetailRepository.findById(orderDetailsId).orElse(null);
+    public OrderDetailListResponse getOrderDetailById(Integer orderId, Integer productId) {
+        OrderDetail orderDetail = orderDetailRepository.findById(createOrderDetailsId(orderId,productId)).orElse(null);
 
         if (orderDetail == null) {
             return null;
@@ -52,21 +55,34 @@ public class OrderDetailManager implements OrderDetailService {
         return this.modelMapperService.forResponse().map(orderDetail, OrderDetailListResponse.class);
 
     }
-
+    private OrderDetailsId createOrderDetailsId(Integer orderId, Integer productId){
+        OrderDetailsId orderDetailsId = new OrderDetailsId();
+        Order order = new Order();
+        order.setOrderId(orderId);
+        Product product = new Product();
+        product.setProductId(productId);
+        orderDetailsId.setOrder(order);
+        orderDetailsId.setProduct(product);
+        return orderDetailsId;
+    }
 
     @Override
     public OrderDetailListResponse createOrderDetail(CreateOrderDetailRequest createOrderDetailRequest) {
 
-        OrderDetail orderDetail = this.modelMapperService.forRequest().map(createOrderDetailRequest, OrderDetail.class);
+        //createOrderDetailRequest.setOrderDetailsId(createOrderDetailsId(createOrderDetailRequest.getOrderId(), createOrderDetailRequest.getProductId()));
+        Order order = this.modelMapperService.forRequest().map(createOrderDetailRequest.getOrderRequestForOrderDetail(), Order.class);
+        Product product = this.modelMapperService.forRequest().map(createOrderDetailRequest.getProductRequestForOrderDetail(), Product.class);
+        //OrderDetail orderDetail = this.modelMapperService.forRequest().map(createOrderDetailRequest, OrderDetail.class);
+        OrderDetail orderDetail = new OrderDetail(order, product, createOrderDetailRequest.getUnitPrice(), createOrderDetailRequest.getQuantity(), createOrderDetailRequest.getDiscount());
 
-        orderDetailRepository.save(orderDetail);
+        if(orderDetail!=null) orderDetailRepository.save(orderDetail);
 
         return this.modelMapperService.forResponse().map(orderDetail, OrderDetailListResponse.class);
     }
 
     @Override
-    public void deleteOrderDetailById(OrderDetailsId orderDetailsId) {
-        orderDetailRepository.deleteById(orderDetailsId);
+    public void deleteOrderDetailById(Integer orderId, Integer productId) {
+        orderDetailRepository.deleteById(createOrderDetailsId(orderId,productId));
     }
 
     @Override

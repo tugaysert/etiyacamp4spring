@@ -1,10 +1,9 @@
 package com.etiya.northwind.api.controllers;
 
 import com.etiya.northwind.business.abstracts.ProductService;
-import com.etiya.northwind.business.responses.CreateProductRequest;
+import com.etiya.northwind.business.requests.CreateProductRequest;
 import com.etiya.northwind.business.responses.ProductListResponse;
-import com.etiya.northwind.business.responses.ProductListResponse;
-import com.etiya.northwind.business.responses.UpdateProductRequest;
+import com.etiya.northwind.business.requests.UpdateProductRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

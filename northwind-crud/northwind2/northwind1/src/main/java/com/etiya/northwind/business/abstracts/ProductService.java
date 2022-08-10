@@ -1,9 +1,9 @@
 package com.etiya.northwind.business.abstracts;
 
-import com.etiya.northwind.business.responses.CreateProductRequest;
+import com.etiya.northwind.business.requests.CreateProductRequest;
 import com.etiya.northwind.business.responses.ProductListResponse;
-import com.etiya.northwind.business.responses.ProductListResponse;
-import com.etiya.northwind.business.responses.UpdateProductRequest;
+import com.etiya.northwind.business.requests.UpdateProductRequest;
+import com.etiya.northwind.entities.concretes.Product;
 
 import java.util.List;
 import java.util.Map;
@@ -12,6 +12,7 @@ public interface ProductService {
     List<ProductListResponse> getAlL();
 
     ProductListResponse getProductById(String productId);
+    Product findProductById(Integer productId);
 
     ProductListResponse createProduct(CreateProductRequest createProductRequest);
 

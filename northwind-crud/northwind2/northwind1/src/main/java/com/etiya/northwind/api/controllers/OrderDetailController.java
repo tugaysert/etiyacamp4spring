@@ -1,10 +1,9 @@
 package com.etiya.northwind.api.controllers;
 
 import com.etiya.northwind.business.abstracts.OrderDetailService;
-import com.etiya.northwind.business.responses.CreateOrderDetailRequest;
+import com.etiya.northwind.business.requests.CreateOrderDetailRequest;
 import com.etiya.northwind.business.responses.OrderDetailListResponse;
-import com.etiya.northwind.business.responses.OrderDetailListResponse;
-import com.etiya.northwind.business.responses.UpdateOrderDetailRequest;
+import com.etiya.northwind.business.requests.UpdateOrderDetailRequest;
 import com.etiya.northwind.entities.concretes.OrderDetailsId;
 import org.springframework.web.bind.annotation.*;
 

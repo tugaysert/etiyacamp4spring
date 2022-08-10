@@ -16,13 +16,18 @@ import javax.persistence.*;
 @IdClass(OrderDetailsId.class)
 public class OrderDetail{
     @Id
-    @ManyToOne
+    private Integer orderId;
+
+    @Id
+    private Integer productId;
+
+/*    @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
-    @Id
+
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Product product;
+    private Product product;*/
 
     @Column(name = "unit_price")
     private int unitPrice;

@@ -1,18 +1,16 @@
 package com.etiya.northwind.business.concretes;
 
+import com.etiya.northwind.business.abstracts.OrderDetailService;
 import com.etiya.northwind.business.abstracts.OrderService;
-import com.etiya.northwind.business.abstracts.UpdateOrderRequest;
+import com.etiya.northwind.business.requests.*;
 import com.etiya.northwind.business.responses.*;
 import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
 import com.etiya.northwind.core.utilities.sort.SortingEntities;
 import com.etiya.northwind.dataAccess.abstracts.OrderRepository;
 import com.etiya.northwind.entities.concretes.Order;
-import com.etiya.northwind.entities.concretes.Order;
-import com.etiya.northwind.entities.concretes.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -26,10 +24,14 @@ public class OrderManager implements OrderService {
 
     private final OrderRepository orderRepository;
     private final ModelMapperService modelMapperService;
+    private final OrderDetailService orderDetailService;
 
-    public OrderManager(OrderRepository orderRepository, ModelMapperService modelMapperService) {
+
+    public OrderManager(OrderRepository orderRepository, ModelMapperService modelMapperService, OrderDetailService orderDetailService) {
         this.orderRepository = orderRepository;
         this.modelMapperService = modelMapperService;
+        this.orderDetailService = orderDetailService;
+
     }
 
 
@@ -41,7 +43,7 @@ public class OrderManager implements OrderService {
                 .map(order -> this.modelMapperService.forResponse().map(order, OrderListResponse.class))
                 .collect(Collectors.toList());
         for (int i = 0; i < result.size(); i++) {
-            manuelNameMapping(response.get(i),result.get(i));
+            mappingForOrderResponse(response.get(i),result.get(i));
         }
 
         return response;
@@ -54,27 +56,46 @@ public class OrderManager implements OrderService {
         if (order == null) {
             return null;
         }
-        OrderListResponse orderListResponse =  this.modelMapperService.forResponse().map(order, OrderListResponse.class);
-        manuelNameMapping(orderListResponse, order);
-        return orderListResponse;
+        //OrderListResponse orderListResponse =  this.modelMapperService.forResponse().map(order, OrderListResponse.class);
+
+        return mappingForOrderResponse(new OrderListResponse(), order);
+
 
     }
+    public OrderListResponse mappingForOrderResponse(OrderListResponse orderListResponse, Order order){
+        orderListResponse = this.modelMapperService.forResponse().map(order, OrderListResponse.class);
+        orderListResponse.setCustomerName(order.getCustomer().getCompanyName()
+                + " and " + order.getCustomer().getContactName());
+        orderListResponse.setEmployeeName(order.getEmployee().getFirstName()
+                + " " + order.getEmployee().getLastName());
+        return orderListResponse;
+    }
+
     public void manuelNameMapping(OrderListResponse orderListResponse, Order order){
         orderListResponse.setCustomerName(order.getCustomer().getCompanyName()
                 + " and " + order.getCustomer().getContactName());
         orderListResponse.setEmployeeName(order.getEmployee().getFirstName()
                 + " " + order.getEmployee().getLastName());
+
     }
 
 
-    @Override
-    public OrderListResponse createOrder(CreateOrderRequest createOrderRequest) {
 
-        Order order = this.modelMapperService.forRequest().map(createOrderRequest, Order.class);
+    @Override
+    public OrderListResponse createOrder(CreateCombineOfOrderRequestAndOrderDetailRequest createCombineOfOrderRequestAndOrderDetailRequest) {
+
+
+
+        Order order = this.modelMapperService.forRequest().map(createCombineOfOrderRequestAndOrderDetailRequest.getCreateOrderRequest(), Order.class);
         orderRepository.save(order);
-        OrderListResponse orderListResponse = this.modelMapperService.forResponse().map(order, OrderListResponse.class);
-        manuelNameMapping(orderListResponse, order);
-        return orderListResponse;
+        CreateOrderDetailRequest createOrderDetailRequest =
+                new CreateOrderDetailRequest(order.getOrderId(),
+                createCombineOfOrderRequestAndOrderDetailRequest.getCreateOrderDetailRequestForOrder().getProductId(), createCombineOfOrderRequestAndOrderDetailRequest.getCreateOrderDetailRequestForOrder().getUnitPrice(),
+                createCombineOfOrderRequestAndOrderDetailRequest.getCreateOrderDetailRequestForOrder().getQuantity(), createCombineOfOrderRequestAndOrderDetailRequest.getCreateOrderDetailRequestForOrder().getDiscount());
+        orderDetailService.createOrderDetail(createOrderDetailRequest);
+        //OrderListResponse orderListResponse = this.modelMapperService.forResponse().map(order, OrderListResponse.class);
+
+        return mappingForOrderResponse(new OrderListResponse(), order);
     }
 
     @Override

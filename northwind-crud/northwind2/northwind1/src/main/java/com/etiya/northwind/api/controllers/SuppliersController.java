@@ -1,10 +1,9 @@
 package com.etiya.northwind.api.controllers;
 
 import com.etiya.northwind.business.abstracts.SupplierService;
-import com.etiya.northwind.business.responses.CreateSupplierRequest;
+import com.etiya.northwind.business.requests.CreateSupplierRequest;
 import com.etiya.northwind.business.responses.SupplierListResponse;
-import com.etiya.northwind.business.responses.SupplierListResponse;
-import com.etiya.northwind.business.responses.UpdateSupplierRequest;
+import com.etiya.northwind.business.requests.UpdateSupplierRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

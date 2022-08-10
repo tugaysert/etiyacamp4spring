@@ -1,12 +1,12 @@
 package com.etiya.northwind.business.concretes;
 
 import com.etiya.northwind.business.abstracts.EmployeeService;
+import com.etiya.northwind.business.requests.CreateEmployeeRequest;
+import com.etiya.northwind.business.requests.UpdateEmployeeRequest;
 import com.etiya.northwind.business.responses.*;
 import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
 import com.etiya.northwind.core.utilities.sort.SortingEntities;
 import com.etiya.northwind.dataAccess.abstracts.EmployeeRepository;
-import com.etiya.northwind.entities.concretes.Employee;
-import com.etiya.northwind.entities.concretes.Employee;
 import com.etiya.northwind.entities.concretes.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

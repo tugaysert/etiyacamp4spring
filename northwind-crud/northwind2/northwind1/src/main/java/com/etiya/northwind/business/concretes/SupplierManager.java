@@ -1,21 +1,18 @@
 package com.etiya.northwind.business.concretes;
 
 import com.etiya.northwind.business.abstracts.SupplierService;
-import com.etiya.northwind.business.responses.CreateSupplierRequest;
+import com.etiya.northwind.business.requests.CreateSupplierRequest;
 import com.etiya.northwind.business.responses.SupplierListResponse;
-import com.etiya.northwind.business.responses.SupplierListResponse;
-import com.etiya.northwind.business.responses.UpdateSupplierRequest;
+import com.etiya.northwind.business.requests.UpdateSupplierRequest;
 import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
 import com.etiya.northwind.core.utilities.sort.SortingEntities;
 import com.etiya.northwind.dataAccess.abstracts.SupplierRepository;
-import com.etiya.northwind.entities.concretes.Supplier;
 import com.etiya.northwind.entities.concretes.Supplier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

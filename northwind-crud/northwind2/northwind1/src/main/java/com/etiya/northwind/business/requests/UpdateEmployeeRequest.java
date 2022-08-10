@@ -1,4 +1,4 @@
-package com.etiya.northwind.business.responses;
+package com.etiya.northwind.business.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

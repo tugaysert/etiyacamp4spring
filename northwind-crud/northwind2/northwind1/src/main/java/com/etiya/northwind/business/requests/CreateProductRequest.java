@@ -1,4 +1,4 @@
-package com.etiya.northwind.business.responses;
+package com.etiya.northwind.business.requests;
 
 import com.etiya.northwind.entities.concretes.Category;
 import com.etiya.northwind.entities.concretes.Supplier;

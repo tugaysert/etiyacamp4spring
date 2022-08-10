@@ -1,8 +1,7 @@
 package com.etiya.northwind.api.controllers;
 
 import com.etiya.northwind.business.abstracts.OrderService;
-import com.etiya.northwind.business.abstracts.UpdateOrderRequest;
-import com.etiya.northwind.business.responses.CreateOrderRequest;
+import com.etiya.northwind.business.requests.*;
 import com.etiya.northwind.business.responses.OrderListResponse;
 
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +31,9 @@ public class OrdersController {
     }
 
     @PostMapping
-    public OrderListResponse createOrder(@RequestBody CreateOrderRequest createOrderRequest)
+    public OrderListResponse createOrder(@RequestBody CreateCombineOfOrderRequestAndOrderDetailRequest createCombineOfOrderRequestAndOrderDetailRequest)
     {
-        return orderService.createOrder(createOrderRequest);
+        return orderService.createOrder(createCombineOfOrderRequestAndOrderDetailRequest);
     }
 
     @DeleteMapping("/{orderId}")

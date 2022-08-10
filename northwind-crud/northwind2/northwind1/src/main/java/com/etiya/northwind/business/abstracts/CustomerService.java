@@ -1,9 +1,8 @@
 package com.etiya.northwind.business.abstracts;
 
-import com.etiya.northwind.business.responses.CreateCustomerRequest;
+import com.etiya.northwind.business.requests.CreateCustomerRequest;
 import com.etiya.northwind.business.responses.CustomerListResponse;
-import com.etiya.northwind.business.responses.CustomerPagingDTO;
-import com.etiya.northwind.business.responses.UpdateCustomerRequest;
+import com.etiya.northwind.business.requests.UpdateCustomerRequest;
 
 import java.util.List;
 import java.util.Map;

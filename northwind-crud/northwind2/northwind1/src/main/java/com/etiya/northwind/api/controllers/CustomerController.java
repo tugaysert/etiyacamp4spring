@@ -1,10 +1,9 @@
 package com.etiya.northwind.api.controllers;
 
 import com.etiya.northwind.business.abstracts.CustomerService;
-import com.etiya.northwind.business.responses.CreateCustomerRequest;
+import com.etiya.northwind.business.requests.CreateCustomerRequest;
 import com.etiya.northwind.business.responses.CustomerListResponse;
-import com.etiya.northwind.business.responses.CustomerPagingDTO;
-import com.etiya.northwind.business.responses.UpdateCustomerRequest;
+import com.etiya.northwind.business.requests.UpdateCustomerRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

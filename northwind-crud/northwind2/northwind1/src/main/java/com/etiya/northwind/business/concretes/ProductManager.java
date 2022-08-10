@@ -1,19 +1,18 @@
 package com.etiya.northwind.business.concretes;
 
 import com.etiya.northwind.business.abstracts.ProductService;
-import com.etiya.northwind.business.responses.CreateProductRequest;
+import com.etiya.northwind.business.requests.CreateProductRequest;
 import com.etiya.northwind.business.responses.ProductListResponse;
-import com.etiya.northwind.business.responses.ProductListResponse;
-import com.etiya.northwind.business.responses.UpdateProductRequest;
+import com.etiya.northwind.business.requests.UpdateProductRequest;
 import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
 import com.etiya.northwind.core.utilities.sort.SortingEntities;
 import com.etiya.northwind.dataAccess.abstracts.ProductRepository;
-import com.etiya.northwind.entities.concretes.Product;
 import com.etiya.northwind.entities.concretes.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +50,17 @@ public class ProductManager implements ProductService {
             return null;
         }
         return this.modelMapperService.forResponse().map(product, ProductListResponse.class);
+
+    }
+
+    @Override
+    public Product findProductById(Integer productId) {
+        Product product = productRepository.findById(productId).orElseThrow(() -> new NotFoundException("bulunamadi"));
+
+        if (product == null) {
+            return null;
+        }
+        return product;
 
     }
 

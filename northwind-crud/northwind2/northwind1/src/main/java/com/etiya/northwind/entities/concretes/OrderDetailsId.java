@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Data
 public class OrderDetailsId implements Serializable {
 
-    private Order order ;
-    private Product product ;
+    private Integer orderId ;
+    private Integer productId ;
 
 }

@@ -1,7 +1,6 @@
 package com.etiya.northwind.business.abstracts;
 
-import com.etiya.northwind.business.responses.CreateOrderRequest;
-import com.etiya.northwind.business.responses.OrderListResponse;
+import com.etiya.northwind.business.requests.*;
 import com.etiya.northwind.business.responses.OrderListResponse;
 
 
@@ -13,7 +12,8 @@ public interface OrderService {
 
     OrderListResponse getOrderById(String orderId);
 
-    OrderListResponse createOrder(CreateOrderRequest createOrderRequest);
+    OrderListResponse createOrder(CreateCombineOfOrderRequestAndOrderDetailRequest createCombineOfOrderRequestAndOrderDetailRequest );
+
 
     void deleteOrderById(String orderId);
 

@@ -1,11 +1,10 @@
 package com.etiya.northwind.business.concretes;
 
 import com.etiya.northwind.business.abstracts.CustomerService;
-import com.etiya.northwind.business.responses.CreateCustomerRequest;
+import com.etiya.northwind.business.requests.CreateCustomerRequest;
 import com.etiya.northwind.business.responses.CustomerListResponse;
 
-import com.etiya.northwind.business.responses.CustomerPagingDTO;
-import com.etiya.northwind.business.responses.UpdateCustomerRequest;
+import com.etiya.northwind.business.requests.UpdateCustomerRequest;
 import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
 import com.etiya.northwind.core.utilities.sort.SortingEntities;
 import com.etiya.northwind.dataAccess.abstracts.CustomerRepository;
@@ -14,10 +13,8 @@ import com.etiya.northwind.entities.concretes.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

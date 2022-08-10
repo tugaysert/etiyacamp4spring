@@ -1,10 +1,9 @@
 package com.etiya.northwind.api.controllers;
 
 import com.etiya.northwind.business.abstracts.EmployeeService;
-import com.etiya.northwind.business.responses.CreateEmployeeRequest;
+import com.etiya.northwind.business.requests.CreateEmployeeRequest;
 import com.etiya.northwind.business.responses.EmployeeListResponse;
-import com.etiya.northwind.business.responses.EmployeeListResponse;
-import com.etiya.northwind.business.responses.UpdateEmployeeRequest;
+import com.etiya.northwind.business.requests.UpdateEmployeeRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

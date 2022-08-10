@@ -1,10 +1,9 @@
 package com.etiya.northwind.business.abstracts;
 
 
-import com.etiya.northwind.business.responses.CreateEmployeeRequest;
+import com.etiya.northwind.business.requests.CreateEmployeeRequest;
 import com.etiya.northwind.business.responses.EmployeeListResponse;
-import com.etiya.northwind.business.responses.EmployeeListResponse;
-import com.etiya.northwind.business.responses.UpdateEmployeeRequest;
+import com.etiya.northwind.business.requests.UpdateEmployeeRequest;
 
 import java.util.List;
 import java.util.Map;

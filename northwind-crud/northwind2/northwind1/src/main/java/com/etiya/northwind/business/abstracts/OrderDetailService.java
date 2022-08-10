@@ -20,7 +20,7 @@ public interface OrderDetailService {
 
     void deleteOrderDetailById(Integer orderId, Integer productId);
 
-    OrderDetailListResponse updateOrderDetail(OrderDetailsId orderDetailsId, UpdateOrderDetailRequest updateOrderDetailRequest);
+    OrderDetailListResponse updateOrderDetail(Integer orderId, Integer productId, UpdateOrderDetailRequest updateOrderDetailRequest);
 
     Map<String, Object> findByPageable(int page, int size);
 

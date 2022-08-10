@@ -66,7 +66,7 @@ public class OrderDetailManager implements OrderDetailService {
         orderDetailsId.setOrder(order);
         orderDetailsId.setProduct(product);
         return orderDetailsId;*/
-        return new OrderDetailsId();
+        return new OrderDetailsId(orderId, productId);
     }
 
     @Override
@@ -88,9 +88,9 @@ public class OrderDetailManager implements OrderDetailService {
     }
 
     @Override
-    public OrderDetailListResponse updateOrderDetail(OrderDetailsId orderDetailsId, UpdateOrderDetailRequest updateOrderDetailRequest) {
+    public OrderDetailListResponse updateOrderDetail(Integer orderId, Integer productId, UpdateOrderDetailRequest updateOrderDetailRequest) {
 
-        OrderDetail orderDetail = orderDetailRepository.findById(orderDetailsId).orElse(null);
+        OrderDetail orderDetail = orderDetailRepository.findById(createOrderDetailsId(orderId, productId)).orElse(null);
         if (orderDetail == null) {
             return null;
         }

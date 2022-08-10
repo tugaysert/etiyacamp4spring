@@ -43,8 +43,8 @@ public class OrderDetailController {
     }
 
     @PutMapping
-    public OrderDetailListResponse updateOrderDetail(@RequestBody OrderDetailsId orderDetailsId, @RequestBody UpdateOrderDetailRequest updateOrderDetailRequest) {
-        return orderDetailService.updateOrderDetail(orderDetailsId, updateOrderDetailRequest);
+    public OrderDetailListResponse updateOrderDetail(@RequestParam Integer orderId, @RequestParam Integer productId, @RequestBody UpdateOrderDetailRequest updateOrderDetailRequest) {
+        return orderDetailService.updateOrderDetail(orderId, productId, updateOrderDetailRequest);
     }
 
     @GetMapping("/getAllWithPaging")

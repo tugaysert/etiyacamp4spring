@@ -28,12 +28,12 @@ public class OrderDetailManager implements OrderDetailService {
     private final OrderDetailRepository orderDetailRepository;
     private final ModelMapperService modelMapperService;
 
-    private final ProductService productService;
 
-    public OrderDetailManager(OrderDetailRepository orderDetailRepository, ModelMapperService modelMapperService, ProductService productService) {
+
+    public OrderDetailManager(OrderDetailRepository orderDetailRepository, ModelMapperService modelMapperService) {
         this.orderDetailRepository = orderDetailRepository;
         this.modelMapperService = modelMapperService;
-        this.productService = productService;
+
     }
 
     @Override

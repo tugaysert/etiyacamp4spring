@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,12 +39,13 @@ public class OrderManager implements OrderService {
     @Override
     public List<OrderListResponse> getAlL() {
         List<Order> result =  this.orderRepository.findAll();
-        List<OrderListResponse> response = result
+        List<OrderListResponse> response = new ArrayList<>();
+       /*         result
                 .stream()
                 .map(order -> this.modelMapperService.forResponse().map(order, OrderListResponse.class))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
         for (int i = 0; i < result.size(); i++) {
-            mappingForOrderResponse(response.get(i),result.get(i));
+            response.add(mappingForOrderResponse(result.get(i)));
         }
 
         return response;
@@ -58,12 +60,12 @@ public class OrderManager implements OrderService {
         }
         //OrderListResponse orderListResponse =  this.modelMapperService.forResponse().map(order, OrderListResponse.class);
 
-        return mappingForOrderResponse(new OrderListResponse(), order);
+        return mappingForOrderResponse(order);
 
 
     }
-    public OrderListResponse mappingForOrderResponse(OrderListResponse orderListResponse, Order order){
-        orderListResponse = this.modelMapperService.forResponse().map(order, OrderListResponse.class);
+    public OrderListResponse mappingForOrderResponse(Order order){
+        OrderListResponse orderListResponse = this.modelMapperService.forResponse().map(order, OrderListResponse.class);
         orderListResponse.setCustomerName(order.getCustomer().getCompanyName()
                 + " and " + order.getCustomer().getContactName());
         orderListResponse.setEmployeeName(order.getEmployee().getFirstName()
@@ -95,7 +97,7 @@ public class OrderManager implements OrderService {
         orderDetailService.createOrderDetail(createOrderDetailRequest);
         //OrderListResponse orderListResponse = this.modelMapperService.forResponse().map(order, OrderListResponse.class);
 
-        return mappingForOrderResponse(new OrderListResponse(), order);
+        return mappingForOrderResponse(order);
     }
 
     @Override
@@ -116,7 +118,7 @@ public class OrderManager implements OrderService {
         order2.setEmployee(order.getEmployee());
 
         orderRepository.save(order2);
-        return this.modelMapperService.forResponse().map(order2, OrderListResponse.class);
+        return mappingForOrderResponse(order2);
 
     }
 
@@ -130,8 +132,7 @@ public class OrderManager implements OrderService {
         List<OrderListResponse> orderListResponses =
                 orders
                         .stream()
-                        .map(order ->
-                                this.modelMapperService.forResponse().map(order, OrderListResponse.class))
+                        .map(this::mappingForOrderResponse)
                 .collect(Collectors.toList());
 
 
@@ -154,8 +155,7 @@ public class OrderManager implements OrderService {
         List<OrderListResponse> orderListResponses =
                 result.getContent()
                         .stream()
-                        .map(order ->
-                                this.modelMapperService.forResponse().map(order, OrderListResponse.class))
+                        .map(this::mappingForOrderResponse)
                         .collect(Collectors.toList());
         for (int i = 0; i < orderListResponses.size(); i++) {
             if(orderListResponses.get(i).getOrderId()==result.getContent().get(i).getOrderId()) {

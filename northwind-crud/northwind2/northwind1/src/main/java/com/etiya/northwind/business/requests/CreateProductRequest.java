@@ -10,11 +10,13 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateProductRequest {
-
+    @NotNull
     private Integer productId;
     private String productName;
     private double unitPrice;

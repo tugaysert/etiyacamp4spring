@@ -6,6 +6,7 @@ import com.etiya.northwind.business.responses.EmployeeListResponse;
 import com.etiya.northwind.business.requests.UpdateEmployeeRequest;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -31,7 +32,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public EmployeeListResponse createEmployee(@RequestBody CreateEmployeeRequest createEmployeeRequest)
+    public EmployeeListResponse createEmployee(@RequestBody @Valid CreateEmployeeRequest createEmployeeRequest)
     {
         return employeeService.createEmployee(createEmployeeRequest);
     }

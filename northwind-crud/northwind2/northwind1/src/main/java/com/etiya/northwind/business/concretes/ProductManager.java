@@ -44,11 +44,9 @@ public class ProductManager implements ProductService {
     }
     @Override
     public ProductListResponse getProductById(String productId) {
-        Product product = productRepository.findById(Integer.valueOf(productId)).orElse(null);
+        Product product = productRepository.findById(Integer.valueOf(productId))
+                .orElseThrow(() -> new NotFoundException("Boyle bir product bulunamadi"));
 
-        if (product == null) {
-            return null;
-        }
         return this.modelMapperService.forResponse().map(product, ProductListResponse.class);
 
     }

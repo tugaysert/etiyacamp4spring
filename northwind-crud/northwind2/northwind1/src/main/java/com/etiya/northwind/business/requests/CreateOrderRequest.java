@@ -8,12 +8,17 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateOrderRequest {
+    @NotNull
     private Integer orderId;
+    @NotNull
     private String customerId;
+    @NotNull
     private String employeeId;
 
 }

@@ -6,6 +6,7 @@ import com.etiya.northwind.business.responses.CustomerListResponse;
 import com.etiya.northwind.business.requests.UpdateCustomerRequest;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -32,7 +33,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping
-	public CustomerListResponse createCustomer(@RequestBody CreateCustomerRequest createCustomerRequest)
+	public CustomerListResponse createCustomer(@RequestBody @Valid CreateCustomerRequest createCustomerRequest)
 	{
 		return customerService.createCustomer(createCustomerRequest);
 	}
